@@ -7,13 +7,13 @@ import math
 
 
 # PID Gains (Haven't yet tuned)
-Kp = 0.01
+Kp = 0.3
 Ki = 0.00005
-Kd = 0.01
+Kd = 0.1
 
 # Setpoint & Sensor Measurement
 SETPOINT = 0
-sensorTiltAngle = 10  # positive mean point to the right  # negative mean left
+sensorTiltAngle = 30  # positive mean point to the right  # negative mean left
 
 # PID Error Parameters
 pastError1 = 0
