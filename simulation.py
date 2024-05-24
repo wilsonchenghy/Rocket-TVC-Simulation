@@ -6,7 +6,7 @@ import math
 
 
 
-# PID Gains (Haven't yet tuned)
+# PID Gains
 Kp = 0.3
 Ki = 0.00005
 Kd = 0.1
