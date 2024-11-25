@@ -7,9 +7,9 @@ import math
 
 
 # PID Gains
-Kp = 0.3
-Ki = 0.00005
-Kd = 0.1
+Kp = 0.35
+Ki = 0.0008
+Kd = 0.25
 
 # Setpoint & Sensor Measurement
 SETPOINT = 0
@@ -103,12 +103,12 @@ def pid(set_point, current_point, time_change, past_error, integral_error):
     error = set_point - current_point
     derivative_error = (error - past_error) / time_change
 
-    if (sensorTiltAngle <= 4 and sensorTiltAngle >= -4):
-        integral_error += error
-    else:
-        integral_error = 0
-
     output_value = - (Kp * error + Ki * integral_error + Kd * derivative_error)
+
+    if (abs(output_value) >= 4 and ((error >= 0 and integral_error >= 0) or (error < 0 and integral_error < 0))):
+        integral_error = integral_error
+    else:
+        integral_error += error * time_change
 
     return output_value, error, integral_error
 
@@ -131,7 +131,7 @@ def main():
     pastTime = time.time()
     isRecordSteadyTime = True
     pastTime_forSteadyState = time.time()
-    timeInterval_forSteadyState = 10
+    timeInterval_forSteadyState = 7
     startSimTime = time.time()
 
     while True:
